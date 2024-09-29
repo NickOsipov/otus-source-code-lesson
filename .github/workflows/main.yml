@@ -89,7 +89,7 @@ jobs:
   #           pip install -r requirements.txt
           
   deploy:
-    needs: build
+    # needs: build
     runs-on: ubuntu-latest
     steps:
     - name: Deploy to server
