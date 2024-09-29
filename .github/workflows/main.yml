@@ -101,6 +101,5 @@ jobs:
         script: |
           cd ${{ env.PROJECT_NAME }}
           source .venv/bin/activate
-          pkill -f "streamlit run src/app.py" || true
-          sleep 5
+          kill $(lsof -t -i:8501) || true
           nohup streamlit run src/app.py --server.port 8501 > streamlit.log 2>&1 &
