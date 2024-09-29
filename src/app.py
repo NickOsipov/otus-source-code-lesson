@@ -2,6 +2,9 @@ import streamlit as st
 
 
 def main():
+    """
+    Main function of the Streamlit app.
+    """
     st.title("Hello World Streamlit")
 
     name = st.text_input("Input your name:")
