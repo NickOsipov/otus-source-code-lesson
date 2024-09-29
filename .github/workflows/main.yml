@@ -59,24 +59,34 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
-    - name: Build production environment
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ env.SERVER_HOST }}
-        username: ${{ env.SERVER_USER }}
-        key: ${{ env.SERVER_SSH_PRIVATE_KEY }}
-        script: |
-          mkdir -p ${{ env.PROJECT_NAME }} | true
-          cd ${{ env.PROJECT_NAME }}
-          # check venv
-          if [ ! -d ".venv" ]; then
-            python3 -m venv .venv
-          fi
-          # activate venv
-          source .venv/bin/activate
-          # install dependencies
-          pip install --upgrade pip
-          pip install -r requirements.txt
+      - uses: actions/checkout@v2
+      - name: Copy requirements.txt to server
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ env.SERVER_HOST }}
+          username: ${{ env.SERVER_USER }}
+          key: ${{ env.SERVER_SSH_PRIVATE_KEY }}
+          source: "requirements.txt,src"
+          target: "${{ env.PROJECT_NAME }}"
+  
+      - name: Build production environment
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.SERVER_HOST }}
+          username: ${{ env.SERVER_USER }}
+          key: ${{ env.SERVER_SSH_PRIVATE_KEY }}
+          script: |
+            mkdir -p ${{ env.PROJECT_NAME }} || true
+            cd ${{ env.PROJECT_NAME }}
+            # check venv
+            if [ ! -d ".venv" ]; then
+              python3 -m venv .venv
+            fi
+            # activate venv
+            source .venv/bin/activate
+            # install dependencies
+            pip install --upgrade pip
+            pip install -r requirements.txt
           
   deploy:
     needs: build
@@ -90,6 +100,6 @@ jobs:
         key: ${{ env.SERVER_SSH_PRIVATE_KEY }}
         script: |
           cd ${{ env.PROJECT_NAME }}
-          git pull origin main
           source .venv/bin/activate
-          streamlit run src/app.py --server.port 8501
+          kill $(lsof -t -i:8501) || true
+          nohup streamlit run src/app.py --server.port 8501
