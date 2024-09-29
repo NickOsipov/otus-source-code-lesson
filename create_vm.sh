@@ -34,5 +34,5 @@ YC_PROXY_VM_PUBLIC_IP=$(
 log "Proxy VM public IP: $YC_PROXY_VM_PUBLIC_IP"
 
 # Копирование SSH-ключа на виртуальную машину
-# scp ~/.ssh/yc $YC_USER@$YC_PROXY_VM_PUBLIC_IP:~/.ssh/yc
-# log "INFO": "SSH private key copied to proxy VM successfully!"
+scp ~/.ssh/yc.pub $YC_USER@$YC_PROXY_VM_PUBLIC_IP:~/.ssh/yc.pub
+log "INFO": "SSH public key copied to proxy VM successfully!"
