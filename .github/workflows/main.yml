@@ -68,7 +68,7 @@ jobs:
           host: ${{ env.SERVER_HOST }}
           username: ${{ env.SERVER_USER }}
           key: ${{ env.SERVER_SSH_PRIVATE_KEY }}
-          source: "requirements.txt,src,config,models"
+          source: "requirements.txt,src,config,models,data"
           target: ${{ env.PROJECT_NAME }}
       - name: Build prod environment
         uses: appleboy/ssh-action@master
