@@ -1,7 +1,7 @@
-from src.data import load_metadata
 import pandas as pd
 import streamlit as st
 
+from src.data import load_metadata
 from src.models import load_model
 
 
