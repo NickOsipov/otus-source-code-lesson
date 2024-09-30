@@ -12,6 +12,7 @@ from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 
 
+# pylint: disable=no-member
 def load_data() -> Tuple[np.ndarray, np.ndarray, List[str], List[str]]:
     """
     Load the Iris dataset.
@@ -30,7 +31,7 @@ def load_data() -> Tuple[np.ndarray, np.ndarray, List[str], List[str]]:
 
 
 def split_data(
-    X: np.ndarray,
+    x: np.ndarray,
     y: np.ndarray,
     test_size: float = 0.2,
     random_state: int = 42,
@@ -56,4 +57,4 @@ def split_data(
         A tuple containing train-test split of inputs:
         (X_train, X_test, y_train, y_test)
     """
-    return train_test_split(X, y, test_size=test_size, random_state=random_state)
+    return train_test_split(x, y, test_size=test_size, random_state=random_state)
