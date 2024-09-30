@@ -5,6 +5,7 @@ Test module for the metrics module.
 from typing import List
 
 import pytest
+
 from src.metrics import calculate_mean
 
 
