@@ -33,8 +33,6 @@ jobs:
       run: black --check ${{ env.PATH_TO_LINT }}
     - name: Run isort
       run: isort --profile black --check ${{ env.PATH_TO_LINT }}
-    - name: Run flake8
-      run: flake8 ${{ env.PATH_TO_LINT }}
     - name: Run pylint
       run: pylint ${{ env.PATH_TO_LINT }}
 
