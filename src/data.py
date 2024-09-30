@@ -1,15 +1,20 @@
 """
-Module for loading and splitting the Iris dataset.
-
-This module provides functions to load the Iris dataset and split it into
-training and testing sets.
+Module: data.py
+Description:
+    Module for loading and splitting the Iris dataset.
+    This module provides functions to load the Iris dataset and split it into
+    training and testing sets.
 """
 
+import os
 from typing import List, Tuple
 
+import joblib
 import numpy as np
 from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
+
+from config.variables import DATA_DIR
 
 
 # pylint: disable=no-member
@@ -58,3 +63,48 @@ def split_data(
         (X_train, X_test, y_train, y_test)
     """
     return train_test_split(x, y, test_size=test_size, random_state=random_state)
+
+
+def save_metadata(feature_names: List[str], target_names: List[str]) -> None:
+    """
+    Save feature names and target names to files.
+
+    Parameters
+    ----------
+    feature_names : List[str]
+        The names of the features
+    target_names : List[str]
+        The names of the target classes
+    """
+    feature_names_path = os.path.join(DATA_DIR, "metadata", "feature_names.joblib")
+    target_names_path = os.path.join(DATA_DIR, "metadata", "target_names.joblib")
+
+    joblib.dump(feature_names, feature_names_path)
+    joblib.dump(target_names, target_names_path)
+
+
+def load_metadata(
+    feature_filename: str = "feature_names.joblib",
+    target_filename: str = "target_names.joblib"
+) -> Tuple[List[str], List[str]]:
+    """
+    Load metadata (feature names and target names).
+
+    Parameters
+    ----------
+    feature_filename : str, optional
+        The name of the file containing the feature names, by default "feature_names.joblib"
+    target_filename : str, optional
+        The name of the file containing the target names, by default "target_names.joblib"
+
+    Returns
+    -------
+    Tuple[List[str], List[str]]
+        A tuple containing the feature names and target names
+    """
+    feature_names_path = os.path.join(DATA_DIR, "metadata", feature_filename)
+    target_names_path = os.path.join(DATA_DIR, "metadata", target_filename)
+
+    feature_names = joblib.load(feature_names_path)
+    target_names = joblib.load(target_names_path)
+    return feature_names, target_names

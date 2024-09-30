@@ -4,7 +4,7 @@ users:
     groups: sudo
     shell: /bin/bash
     sudo: ['ALL=(ALL) NOPASSWD:ALL']
-    ssh-authorized-keys: '< your ssh public key >'
+    ssh-authorized-keys: '<your ssh public key>'
 write_files:
   - path: "/usr/local/etc/startup.sh"
     permissions: "755"

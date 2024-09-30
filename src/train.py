@@ -4,11 +4,10 @@ Main script to train and save the model.
 
 from loguru import logger
 
-from src.data import load_data, split_data
+from src.data import load_data, split_data, save_metadata
 from src.models import (
     create_model,
     evaluate_model,
-    save_metadata,
     save_model,
     train_model,
 )

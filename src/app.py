@@ -6,6 +6,7 @@ import pandas as pd
 import streamlit as st
 
 from src.models import load_model
+from src.data import load_metadata
 
 
 def main():
@@ -16,7 +17,8 @@ def main():
     st.title("Iris Flower Prediction App")
 
     # Load the trained model and other saved data
-    model, feature_names, target_names = load_model()
+    model = load_model()
+    feature_names, target_names = load_metadata()
 
     # Create input fields for features
     st.subheader("Введите характеристики цветка:")

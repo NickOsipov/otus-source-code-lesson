@@ -1,7 +1,6 @@
 #!/bin/bash
 source .bashrc
 
-# Проверка наличия аргумента
 vm_name=$1
 
 # Создание виртуальной машины
@@ -26,13 +25,13 @@ yc compute instance create \
 # Ожидание завершения создания виртуальной машины
 
 # Получение публичного IP-адреса виртуальной машины
-log "Getting public IP address of the proxy VM..."
-YC_PROXY_VM_PUBLIC_IP=$(
-    yc compute instance get $vm_name \
-        --format json | jq -r .network_interfaces[0].primary_v4_address.one_to_one_nat.address
-)
-log "Proxy VM public IP: $YC_PROXY_VM_PUBLIC_IP"
+# log "Getting public IP address of the VM..."
+# YC_PROXY_VM_PUBLIC_IP=$(
+#     yc compute instance get $vm_name \
+#         --format json | jq -r .network_interfaces[0].primary_v4_address.one_to_one_nat.address
+# )
+# log "Proxy VM public IP: $YC_PROXY_VM_PUBLIC_IP"
 
 # Копирование SSH-ключа на виртуальную машину
 # scp ~/.ssh/yc.pub $YC_USER@$YC_PROXY_VM_PUBLIC_IP:~/.ssh/yc.pub
-# log "INFO": "SSH public key copied to proxy VM successfully!"
+# log "INFO": "SSH public key copied to VM successfully!"

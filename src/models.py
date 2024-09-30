@@ -7,17 +7,21 @@ saving and loading associated metadata.
 """
 
 import os
-from typing import List, Tuple
+from typing import Tuple
 
 import joblib
 import numpy as np
 from sklearn.base import BaseEstimator
 from sklearn.ensemble import RandomForestClassifier
 
-MODELS_DIR = "models"
+from config.variables import MODELS_DIR
 
 
-def create_model(n_estimators: int = 100, random_state: int = 42) -> BaseEstimator:
+def create_model(
+    model = RandomForestClassifier,
+    n_estimators: int = 100,
+    random_state: int = 42
+) -> BaseEstimator:
     """
     Create a BaseEstimator model.
 
@@ -35,7 +39,7 @@ def create_model(n_estimators: int = 100, random_state: int = 42) -> BaseEstimat
     BaseEstimator
         An instance of BaseEstimator with the specified parameters
     """
-    return RandomForestClassifier(n_estimators=n_estimators, random_state=random_state)
+    return model(n_estimators=n_estimators, random_state=random_state)
 
 
 def train_model(
@@ -112,51 +116,19 @@ def save_model(
     joblib.dump(model, filepath)
 
 
-def save_metadata(feature_names: List[str], target_names: List[str]) -> None:
+def load_model(model_filename: str = "iris_model.joblib") -> BaseEstimator:
     """
-    Save feature names and target names to files.
-
-    Parameters
-    ----------
-    feature_names : List[str]
-        The names of the features
-    target_names : List[str]
-        The names of the target classes
-    """
-    feature_names_path = os.path.join(MODELS_DIR, "feature_names.joblib")
-    target_names_path = os.path.join(MODELS_DIR, "target_names.joblib")
-
-    joblib.dump(feature_names, feature_names_path)
-    joblib.dump(target_names, target_names_path)
-
-
-def load_model(
-    model_filename: str = "iris_model.joblib",
-    feature_filename: str = "feature_names.joblib",
-    target_filename: str = "target_names.joblib",
-) -> Tuple[RandomForestClassifier, List[str], List[str]]:
-    """
-    Load the model and associated metadata.
+    Load the model.
 
     Parameters
     ----------
     model_filename : str, optional
         The name of the file containing the saved model, by default "iris_model.joblib"
-    feature_filename : str, optional
-        The name of the file containing the feature names, by default "feature_names.joblib"
-    target_filename : str, optional
-        The name of the file containing the target names, by default "target_names.joblib"
 
     Returns
     -------
-    Tuple[RandomForestClassifier, List[str], List[str]]
-        A tuple containing the loaded model, feature names, and target names
+    RandomForestClassifier
+        The loaded model
     """
     model_path = os.path.join(MODELS_DIR, model_filename)
-    feature_names_path = os.path.join(MODELS_DIR, feature_filename)
-    target_names_path = os.path.join(MODELS_DIR, target_filename)
-
-    model = joblib.load(model_path)
-    feature_names = joblib.load(feature_names_path)
-    target_names = joblib.load(target_names_path)
-    return model, feature_names, target_names
+    return joblib.load(model_path)
