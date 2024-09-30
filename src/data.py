@@ -5,7 +5,7 @@ This module provides functions to load the Iris dataset and split it into
 training and testing sets.
 """
 
-from typing import Tuple, List
+from typing import List, Tuple
 
 import numpy as np
 from sklearn.datasets import load_iris
@@ -47,7 +47,7 @@ def split_data(
     test_size : float, optional
         The proportion of the dataset to include in the test split, by default 0.2.
     random_state : int, optional
-        Controls the shuffling applied to the data before applying the split, 
+        Controls the shuffling applied to the data before applying the split,
         by default 42.
 
     Returns

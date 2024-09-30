@@ -3,7 +3,13 @@ Main script to train and save the model.
 """
 
 from src.data import load_data, split_data
-from src.models import create_model, train_model, evaluate_model, save_model, save_metadata
+from src.models import (
+    create_model,
+    evaluate_model,
+    save_metadata,
+    save_model,
+    train_model,
+)
 
 
 def main() -> None:
@@ -26,7 +32,9 @@ def main() -> None:
     trained_model = train_model(model, x_train, y_train)
 
     # Evaluate model
-    train_score, test_score = evaluate_model(trained_model, x_train, y_train, x_test, y_test)
+    train_score, test_score = evaluate_model(
+        trained_model, x_train, y_train, x_test, y_test
+    )
     print(f"Train score: {train_score:.2f}")
     print(f"Test score: {test_score:.2f}")
 

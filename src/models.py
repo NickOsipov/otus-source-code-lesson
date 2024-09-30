@@ -7,15 +7,15 @@ saving and loading associated metadata.
 """
 
 import os
-from typing import Tuple, List
+from typing import List, Tuple
 
 import joblib
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
 from sklearn.base import BaseEstimator
-
+from sklearn.ensemble import RandomForestClassifier
 
 MODELS_DIR = "models"
+
 
 def create_model(n_estimators: int = 100, random_state: int = 42) -> BaseEstimator:
     """
@@ -32,7 +32,7 @@ def create_model(n_estimators: int = 100, random_state: int = 42) -> BaseEstimat
 
     Returns
     -------
-    BaseEstimator 
+    BaseEstimator
         An instance of BaseEstimator with the specified parameters
     """
     return RandomForestClassifier(n_estimators=n_estimators, random_state=random_state)
@@ -95,7 +95,9 @@ def evaluate_model(
     return train_score, test_score
 
 
-def save_model(model: RandomForestClassifier, filename: str = "iris_model.joblib") -> None:
+def save_model(
+    model: RandomForestClassifier, filename: str = "iris_model.joblib"
+) -> None:
     """
     Save the trained model to a file.
 
