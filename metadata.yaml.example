@@ -1,0 +1,17 @@
+#cloud-config
+users:
+  - name: ubuntu
+    groups: sudo
+    shell: /bin/bash
+    sudo: ['ALL=(ALL) NOPASSWD:ALL']
+    ssh-authorized-keys: '< your ssh public key >'
+write_files:
+  - path: "/usr/local/etc/startup.sh"
+    permissions: "755"
+    content: |
+      #!/bin/bash
+      sudo apt-get update
+      sudo apt-get install -y git python3-venv python3-pip
+    defer: true
+runcmd:
+  - ["/usr/local/etc/startup.sh"]
