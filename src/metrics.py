@@ -31,7 +31,8 @@ def calculate_mean(
 
     Notes
     -----
-    The mean is calculated as the sum of the numbers divided by the count of the numbers.
+    The mean is calculated as the sum of the numbers
+    divided by the count of the numbers.
 
     Examples
     --------

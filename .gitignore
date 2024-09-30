@@ -4,3 +4,7 @@ __pycache__
 .pytest_cache
 .vscode
 .DS_Store
+metadata.yaml
+test.yml
+.coverage
+*.joblib
