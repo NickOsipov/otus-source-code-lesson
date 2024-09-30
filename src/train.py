@@ -43,7 +43,7 @@ def main() -> None:
     )
     logger.info(f"Train score: {train_score:.2f}")
     logger.info(f"Test score: {test_score:.2f}")
-    
+
     # Save model and metadata
     save_model(trained_model)
     save_metadata(feature_names, target_names)
