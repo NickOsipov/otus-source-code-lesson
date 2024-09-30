@@ -64,7 +64,7 @@ jobs:
           host: ${{ env.SERVER_HOST }}
           username: ${{ env.SERVER_USER }}
           key: ${{ env.SERVER_SSH_PRIVATE_KEY }}
-          source: "requirements.txt,src"
+          source: "requirements.txt,src,models"
           target: "${{ env.PROJECT_NAME }}"
   
       - name: Build production environment
