@@ -18,9 +18,7 @@ from config.variables import MODELS_DIR
 
 
 def create_model(
-    model = RandomForestClassifier,
-    n_estimators: int = 100,
-    random_state: int = 42
+    model=RandomForestClassifier, n_estimators: int = 100, random_state: int = 42
 ) -> BaseEstimator:
     """
     Create a BaseEstimator model.

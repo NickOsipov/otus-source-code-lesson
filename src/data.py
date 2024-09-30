@@ -85,7 +85,7 @@ def save_metadata(feature_names: List[str], target_names: List[str]) -> None:
 
 def load_metadata(
     feature_filename: str = "feature_names.joblib",
-    target_filename: str = "target_names.joblib"
+    target_filename: str = "target_names.joblib",
 ) -> Tuple[List[str], List[str]]:
     """
     Load metadata (feature names and target names).

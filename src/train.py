@@ -4,13 +4,8 @@ Main script to train and save the model.
 
 from loguru import logger
 
-from src.data import load_data, split_data, save_metadata
-from src.models import (
-    create_model,
-    evaluate_model,
-    save_model,
-    train_model,
-)
+from src.data import load_data, save_metadata, split_data
+from src.models import create_model, evaluate_model, save_model, train_model
 
 
 def main() -> None:

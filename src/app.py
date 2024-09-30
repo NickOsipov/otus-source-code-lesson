@@ -1,12 +1,8 @@
-"""
-Main application script.
-"""
-
+from src.data import load_metadata
 import pandas as pd
 import streamlit as st
 
 from src.models import load_model
-from src.data import load_metadata
 
 
 def main():
